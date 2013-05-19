@@ -12,25 +12,51 @@
 
 usage(){
 	echo "Usage: $0 [folder]"
-	echo "Dispatch all files in folder to movies or tv shows folders"
-	echo "Environment variables used:"
-	echo "	- KIT_TV_SHOWS_ROOT	TV Show top folder. Tv shows will be inserted as : "
-	echo "				<tv_show_name>/S<season_number>/<tv_show_short_name>S<season_number>E<episode_number>.<file_extension>"
-	echo "	- KIT_MOVIES_ROOT	Movies folder. All movies will be inserted as :"
-	echo "				<IMBD_name> (<year>).<file_extension>"
+    echo ""
+    echo "Dispatch all files in folder to movies or tv shows folders"
+    echo ""
+	echo "Options"
+	echo "  -d --debug  Debug mode"
+	echo "  -h --help   Print Usage"	
+    echo ""
+    echo "Environment variables used:"
+	echo "  KIT_TV_SHOWS_ROOT   TV Show top folder. Tv shows will be inserted as : "
+	echo "      <tv_show_name>/S<season_number>/<tv_show_short_name>S<season_number>E<episode_number>.<file_extension>"
+	echo "  KIT_MOVIES_ROOT     Movies folder. All movies will be inserted as :"
+	echo "      <IMBD_name> (<year>).<file_extension>"
 	exit 1
 }
 
 detect_pattern(){
 	#How I met	
-	if [[ $FILENAME =~ [Hh]ow\.[Ii]\.[Mm]et.* ]] | [[ $FILENAME =~ HIMYM.* ]]; then
+	if [[ $FILENAME =~ [Hh]ow[\.[:space:]][Ii][\.[:space:]][Mm]et.* ]] || [[ $FILENAME =~ HIMYM.* ]]; then
 		TV_SHOW="How\ I\ Met\ Your\ Mother"
 		TV_SHOW_CODE="HIMYM"
 	fi
 
-	SEASON=`echo $FILENAME | sed -e 's/\(.*\)\.S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\)\..*/\2/'`
-	EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\.S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\)\..*/\3/'`
-	EXTENSION="${FILE##*.}"
+	#House	
+	if [[ $FILENAME =~ [Hh]ouse\..* ]] ; then
+		TV_SHOW="House"
+		TV_SHOW_CODE="House"
+	fi
+
+	#Game of Thrones	
+	if [[ $FILENAME =~ [Hh]ow\.[Ii]\.[Mm]et.* ]] || [[ $FILENAME =~ HIMYM.* ]]; then
+		TV_SHOW="How\ I\ Met\ Your\ Mother"
+		TV_SHOW_CODE="HIMYM"
+	fi
+
+	if [[ -n $TV_SHOW ]]; then
+		SEASON=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\).*/\2/'`
+		EPISODE=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\).*/\3/'`
+		EXTENSION="${FILE##*.}"
+	fi
+
+	if [[ -n $DEBUG ]]; then
+		echo "TV_SHOW : $TV_SHOW"
+		echo "EPISODE : $EPISODE"
+		echo "SEASON : $SEASON"
+	fi
 }
 
 create_path(){
@@ -48,10 +74,13 @@ move_file(){
 }
 
 execute(){
-	echo "Search path : $DIR/*";	
 	for FILE in $DIR/* 
 	do 
-		FILENAME=`basename $FILE`	
+		if [[ -n $DEBUG ]]; then
+			echo "--------------------------------"
+			echo "Analysing $FILE"
+		fi
+		FILENAME=`basename "$FILE"`	
 		detect_pattern
 		create_path
 		move_file
@@ -60,21 +89,25 @@ execute(){
 		unset SEASON
 		unset EPISODE
 		unset EXTENSION
+		unset MOVE_PATH
 	done
 }
 
 # Verifying if help as been requested
-if [[ "$1" = "-h" ]] | [[ "$1" = "--help" ]] ; then
-  usage;
+if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]] ; then
+	usage;
 fi
 
-# Checking folder is existing
-if [[ -d "$1" ]]; then
-	DIR="$1";
+# debug
+if [[ $1 = "-d" ]] || [[ $1 = "--debug" ]] ; then
+	DEBUG="yep"
+	DIR=$2
+else
+	DIR=$1
 fi
 
 # If no folder specified, using current folder
-if [[ "$1" = "" ]]; then 
+if [[ $DIR = "" ]]; then 
 	echo "No input directory specified. Using current directory"
 	DIR=`pwd`;
 fi
