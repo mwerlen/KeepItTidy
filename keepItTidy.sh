@@ -22,27 +22,28 @@ usage(){
 }
 
 detect_pattern(){
-	REGEX="(How\.I\.Met).*"
-	if [[ $FILE =~ $REGEX ]]; then
-		TV_SHOW="How I Met Your Mother"
+	#How I met	
+	if [[ $FILENAME =~ [Hh]ow\.[Ii]\.[Mm]et.* ]] | [[ $FILENAME =~ HIMYM.* ]]; then
+		TV_SHOW="How\ I\ Met\ Your\ Mother"
 		TV_SHOW_CODE="HIMYM"
-		SEASON="8"
-		EPISODE="5"
 	fi
+
+	SEASON=`echo $FILENAME | sed -e 's/\(.*\)\.S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\)\..*/\2/'`
+	EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\.S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\)\..*/\3/'`
 	EXTENSION="${FILE##*.}"
 }
 
 create_path(){
-	if [[ ! $TV_SHOW = "" ]]; then 
-		MOVE_PATH=$TV_SHOW/S$(printf "%02d" $SEASON)/${TV_SHOW_CODE}.S$(printf "%02d" $SEASON)E$(printf "%02d" $EPISODE).${EXTENSION}
+	if [[ -n $TV_SHOW ]] & [[ $SEASON = "" ]] & [[ ! $EPISODE = "" ]] ; then 
+		MOVE_PATH=$TV_SHOW/S$(printf "%02d" ${SEASON#0})/${TV_SHOW_CODE}.S$(printf "%02d" ${SEASON#0})E$(printf "%02d" ${EPISODE#0}).${EXTENSION}
 	fi
 }
 
 move_file(){
 	if [[ $MOVE_PATH ]]; then
-		echo "Moving file to $MOVE_PATH"
+		echo "Moving $FILENAME to $MOVE_PATH"
 	else
-		echo "No match found for this file."
+		echo "No match found for $FILENAME."
 	fi
 }
 
@@ -50,10 +51,15 @@ execute(){
 	echo "Search path : $DIR/*";	
 	for FILE in $DIR/* 
 	do 
-		echo "Processing $FILE file..";
+		FILENAME=`basename $FILE`	
 		detect_pattern
 		create_path
 		move_file
+		unset TV_SHOW
+		unset TV_SHOW_CODE
+		unset SEASON
+		unset EPISODE
+		unset EXTENSION
 	done
 }
 
