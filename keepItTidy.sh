@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #########################################################################
 #									#
@@ -22,19 +22,28 @@ usage(){
 }
 
 detect_pattern(){
-	TV_SHOW="How I Met Your Mother"
-	TV_SHOW_CODE="HIMYM"
-	SEASON="8"
-	EPISODE="5"
-	EXTENSION="avi"
+	REGEX="(How\.I\.Met).*"
+	if [[ $FILE =~ $REGEX ]]; then
+		TV_SHOW="How I Met Your Mother"
+		TV_SHOW_CODE="HIMYM"
+		SEASON="8"
+		EPISODE="5"
+	fi
+	EXTENSION="${FILE##*.}"
 }
 
 create_path(){
-	PATH=$TV_SHOW/S$(printf "%02d" $SEASON)/${TV_SHOW_CODE}.S$(printf "%02d" $SEASON)E$(printf "%02d" $EPISODE).${EXTENSION}
+	if [[ ! $TV_SHOW = "" ]]; then 
+		MOVE_PATH=$TV_SHOW/S$(printf "%02d" $SEASON)/${TV_SHOW_CODE}.S$(printf "%02d" $SEASON)E$(printf "%02d" $EPISODE).${EXTENSION}
+	fi
 }
 
 move_file(){
-	echo "Moving file to $PATH"
+	if [[ $MOVE_PATH ]]; then
+		echo "Moving file to $MOVE_PATH"
+	else
+		echo "No match found for this file."
+	fi
 }
 
 execute(){
@@ -49,23 +58,23 @@ execute(){
 }
 
 # Verifying if help as been requested
-if [ "$1" = "-h" ] | [ "$1" = "--help" ] ; then
+if [[ "$1" = "-h" ]] | [[ "$1" = "--help" ]] ; then
   usage;
 fi
 
 # Checking folder is existing
-if [ -d "$1" ]; then
+if [[ -d "$1" ]]; then
 	DIR="$1";
 fi
 
 # If no folder specified, using current folder
-if [ "$1" = "" ]; then 
+if [[ "$1" = "" ]]; then 
 	echo "No input directory specified. Using current directory"
 	DIR=`pwd`;
 fi
 
 # If argument is not a directory, display usage
-if [ ! -d "$DIR" ]; then
+if [[ ! -d "$DIR" ]]; then
 	usage;
 fi
 
