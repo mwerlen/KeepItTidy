@@ -122,6 +122,8 @@ process_file() {
 }
 
 execute(){
+    log "Starting up script"
+    
     if [[ -n $TR_TORRENT_NAME ]] ; then
         log "####################################################"
         log "Execting script after completion of $TR_TORRENT_NAME"
@@ -140,6 +142,7 @@ execute(){
         fi
     done
 
+    log "End of script"
 }
 
 # Verifying if help as been requested
