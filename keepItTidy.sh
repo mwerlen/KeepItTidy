@@ -28,7 +28,7 @@ usage(){
 detect_pattern(){
 	#How I met	
 	if [[ $FILENAME =~ [Hh]ow[\.[:space:]][Ii][\.[:space:]][Mm]et.* ]] || [[ $FILENAME =~ HIMYM.* ]]; then
-		TV_SHOW="How\ I\ Met\ Your\ Mother"
+		TV_SHOW="How I Met Your Mother"
 		TV_SHOW_CODE="HIMYM"
 	fi
 
@@ -40,7 +40,7 @@ detect_pattern(){
 
 	#Game of Thrones	
 	if [[ $FILENAME =~ [Gg]ame[\.[:space:]][Oo]f[\.[:space:]][Tt]hrones.* ]] ; then
-		TV_SHOW="Game\ of\ Thrones"
+		TV_SHOW="Game of Thrones"
 		TV_SHOW_CODE="Game.Of.Thrones"
 	fi
 
@@ -66,26 +66,40 @@ create_path(){
 move_file(){
 	if [[ $MOVE_PATH ]]; then
 		echo "Moving $FILENAME to $MOVE_PATH"
+        if [[ -n $DEBUG ]]; then
+            echo mv $FILE "$MOVE_PATH"
+        else
+            mv $FILE "$MOVE_PATH"
+        fi
 	else
 		echo "No match found for $FILENAME."
 	fi
 }
 
 execute(){
-	for FILE in $DIR/* 
-	do 
+    if [[ -n $DEBUG ]]; then
+        echo "####################################################"
+        echo "Execting script after completion of $TR_TORRENT_NAME"
+    fi
+
+    for FILE in $DIR/*/*
+	do
+        EXTENSION="${FILE##*.}"
+        FILENAME=`basename "$FILE"`
 		if [[ -n $DEBUG ]]; then
 			echo "--------------------------------"
 			echo "Analysing $FILE"
+            echo "Filename: $FILENAME, Extension: $EXTENSION"
 		fi
-		FILENAME=`basename "$FILE"`	
-		detect_pattern
-		create_path
-		move_file
-		unset TV_SHOW
-		unset TV_SHOW_CODE
-		unset SEASON
-		unset EPISODE
+        if [[ ! -d $FILE ]] && [[ $EXTENSION =~ (mp4)|(mkv)|(mpeg)|(avi)|(srt) ]] ; then
+		    detect_pattern
+    		create_path
+    		move_file
+        fi
+        unset TV_SHOW
+        unset TV_SHOW_CODE
+        unset SEASON
+    	unset EPISODE
 		unset EXTENSION
 		unset MOVE_PATH
 	done
