@@ -22,8 +22,6 @@ usage(){
     echo "Environment variables used:"
 	echo "  KIT_TV_SHOWS_ROOT   TV Show top folder. Tv shows will be inserted as : "
 	echo "      <tv_show_name>/S<season_number>/<tv_show_short_name>S<season_number>E<episode_number>.<file_extension>"
-	echo "  KIT_MOVIES_ROOT     Movies folder. All movies will be inserted as :"
-	echo "      <IMBD_name> (<year>).<file_extension>"
 	exit 1
 }
 
@@ -35,15 +33,15 @@ detect_pattern(){
 	fi
 
 	#House	
-	if [[ $FILENAME =~ [Hh]ouse\..* ]] ; then
-		TV_SHOW="House"
-		TV_SHOW_CODE="House"
+	if [[ $FILENAME =~ [Nn][Cc][Ii][Ss].* ]] ; then
+		TV_SHOW="NCIS"
+		TV_SHOW_CODE="NCIS"
 	fi
 
 	#Game of Thrones	
-	if [[ $FILENAME =~ [Hh]ow\.[Ii]\.[Mm]et.* ]] || [[ $FILENAME =~ HIMYM.* ]]; then
-		TV_SHOW="How\ I\ Met\ Your\ Mother"
-		TV_SHOW_CODE="HIMYM"
+	if [[ $FILENAME =~ [Gg]ame[\.[:space:]][Oo]f[\.[:space:]][Tt]hrones.* ]] ; then
+		TV_SHOW="Game\ of\ Thrones"
+		TV_SHOW_CODE="Game.Of.Thrones"
 	fi
 
 	if [[ -n $TV_SHOW ]]; then
@@ -61,7 +59,7 @@ detect_pattern(){
 
 create_path(){
 	if [[ -n $TV_SHOW ]] & [[ $SEASON = "" ]] & [[ ! $EPISODE = "" ]] ; then 
-		MOVE_PATH=$TV_SHOW/S$(printf "%02d" ${SEASON#0})/${TV_SHOW_CODE}.S$(printf "%02d" ${SEASON#0})E$(printf "%02d" ${EPISODE#0}).${EXTENSION}
+		MOVE_PATH=$KIT_TV_SHOWS_ROOT/$TV_SHOW/S$(printf "%02d" ${SEASON#0})/${TV_SHOW_CODE}.S$(printf "%02d" ${SEASON#0})E$(printf "%02d" ${EPISODE#0}).${EXTENSION}
 	fi
 }
 
@@ -116,6 +114,13 @@ fi
 if [[ ! -d "$DIR" ]]; then
 	usage;
 fi
+
+# If KIT_TV_SHOWS_ROOT is not a directory, display usage
+if [[ ! -d "$KIT_TV_SHOWS_ROOT" ]]; then
+	usage;
+fi
+
+
 
 # Script execution starts
 execute DIR
