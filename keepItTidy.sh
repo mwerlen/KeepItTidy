@@ -78,9 +78,8 @@ move_file(){
         echo "Moving $FILENAME to $MOVE_PATH"
         if [[ -n $DEBUG ]]; then
             echo mv $FILE "$MOVE_PATH"
-        else
-            mv $FILE "$MOVE_PATH"
-        fi
+        fi        
+        mv $FILE "$MOVE_PATH"
     else
         echo "No match found for $FILENAME."
     fi
@@ -157,6 +156,9 @@ if [[ $1 = "-d" ]] || [[ $1 = "--debug" ]] ; then
 else
     DIR=$1
 fi
+
+log
+log "******************************************************************"
 
 # If no folder specified, using current folder
 if [[ $DIR = "" ]]; then 
