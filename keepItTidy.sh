@@ -91,6 +91,7 @@ process_file() {
     FILENAME=`basename "$FILE"`
 
     if [[ ! -f $FILE ]] ; then
+		log "Found $FILE, but this is not a valid file..."
         #Not a file
         return
     fi
