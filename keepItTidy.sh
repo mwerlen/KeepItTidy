@@ -76,9 +76,7 @@ move_file(){
         fi
 
         echo "Moving $FILENAME to $MOVE_PATH"
-        if [[ -n $DEBUG ]]; then
-            echo mv $FILE "$MOVE_PATH"
-        fi        
+        log "mv $FILE $MOVE_PATH"
         mv $FILE "$MOVE_PATH"
     else
         echo "No match found for $FILENAME."
@@ -132,12 +130,12 @@ execute(){
 
     for FILE_L1 in $DIR/*
     do
-        if [[ -d $FILE ]] ; then
+        if [[ -d $FILE_L1 ]] ; then
             for FILE_L2 in $FILE_L1/*
             do
                 process_file $FILE_L2
             done
-        else        
+        else
             process_file $FILE_L1
         fi
     done
