@@ -88,7 +88,7 @@ process_file() {
     EXTENSION="${FILE##*.}"
     FILENAME=`basename "$FILE"`
 
-    if [[ ! -f $FILE ]] ; then
+    if [[ ! -f "$FILE" ]] ; then
 		log "Found $FILE, but this is not a valid file..."
         #Not a file
         return
@@ -130,13 +130,13 @@ execute(){
 
     for FILE_L1 in $DIR/*
     do
-        if [[ -d $FILE_L1 ]] ; then
-            for FILE_L2 in $FILE_L1/*
+        if [[ -d "$FILE_L1" ]] ; then
+            for FILE_L2 in "$FILE_L1"/*
             do
-                process_file $FILE_L2
+                process_file "$FILE_L2"
             done
         else
-            process_file $FILE_L1
+            process_file "$FILE_L1"
         fi
     done
 
