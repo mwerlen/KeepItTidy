@@ -77,7 +77,7 @@ move_file(){
 
         echo "Moving $FILENAME to $MOVE_PATH"
         log "mv $FILE $MOVE_PATH"
-        mv $FILE "$MOVE_PATH"
+        mv "$FILE" "$MOVE_PATH"
     else
         echo "No match found for $FILENAME."
     fi
