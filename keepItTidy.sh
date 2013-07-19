@@ -51,6 +51,12 @@ detect_pattern(){
         TV_SHOW="Game of Thrones"
         TV_SHOW_CODE="Game.Of.Thrones"
     fi
+    
+    #Game of Thrones    
+    if [[ $FILENAME =~ [Ss][Uu][Ii][Tt][Ss].* ]] ; then
+        TV_SHOW="Suits"
+        TV_SHOW_CODE="Game.Of.Thrones"
+    fi
 
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)E\([[:digit:]]\{1,2\}\).*/\2/'`
