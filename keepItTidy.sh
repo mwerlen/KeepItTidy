@@ -55,7 +55,7 @@ detect_pattern(){
     #Game of Thrones    
     if [[ $FILENAME =~ [Ss][Uu][Ii][Tt][Ss].* ]] ; then
         TV_SHOW="Suits"
-        TV_SHOW_CODE="Game.Of.Thrones"
+        TV_SHOW_CODE="Suits"
     fi
 
     if [[ -n $TV_SHOW ]]; then
