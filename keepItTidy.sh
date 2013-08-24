@@ -59,8 +59,8 @@ detect_pattern(){
     fi
 
     if [[ -n $TV_SHOW ]]; then
-        SEASON=`echo $FILENAME | sed -e  's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]{0,1}]E\([[:digit:]]\{1,2\}\).*/\2/'`
-        EPISODE=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]{0,1}]E\([[:digit:]]\{1,2\}\).*/\3/'`
+        SEASON=`echo $FILENAME | sed -e  's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]]\?E\([[:digit:]]\{1,2\}\).*/\2/'`
+        EPISODE=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]]\?E\([[:digit:]]\{1,2\}\).*/\3/'`
         EXTENSION="${FILE##*.}"
     fi
 }
