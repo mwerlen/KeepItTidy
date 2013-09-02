@@ -40,10 +40,16 @@ detect_pattern(){
         TV_SHOW_CODE="HIMYM"
     fi
 
-    #House    
+    #NCIS    
     if [[ $FILENAME =~ [Nn][Cc][Ii][Ss].* ]] ; then
         TV_SHOW="NCIS"
         TV_SHOW_CODE="NCIS"
+    fi
+    
+    #House Of Cards    
+    if [[ $FILENAME =~ [Hh]ouse[\.[:space:]][Oo]f[\.[:space:]][Cc]ards.* ]] ; then
+        TV_SHOW="House of Cards"
+        TV_SHOW_CODE="HoC"
     fi
 
     #Game of Thrones    
@@ -52,7 +58,7 @@ detect_pattern(){
         TV_SHOW_CODE="Game.Of.Thrones"
     fi
     
-    #Game of Thrones    
+    #Suits  
     if [[ $FILENAME =~ [Ss][Uu][Ii][Tt][Ss].* ]] ; then
         TV_SHOW="Suits"
         TV_SHOW_CODE="Suits"
