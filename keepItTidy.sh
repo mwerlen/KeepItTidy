@@ -80,19 +80,29 @@ move_file(){
         if [[ ! -d $TV_SHOW_FOLDER ]] ; then
             echo "Creating TV show folder : $TV_SHOW_FOLDER" 
             mkdir "$TV_SHOW_FOLDER"
+            chown debian-transmission:ftpusers "$TV_SHOW_FOLDER"
+            chmod 751 "$TV_SHOW_FOLDER"
         fi
         
         if [[ ! -d $SEASON_FOLDER ]] ; then
             echo "Creating season folder : $SEASON_FOLDER" 
             mkdir "$SEASON_FOLDER"
+            chown debian-transmission:ftpusers "$SEASON_FOLDER"
+            chmod 751 "$SEASON_FOLDER"
+
         fi
 
         echo "Moving $FILENAME to $MOVE_PATH"
         log "mv $FILE $MOVE_PATH"
         mv "$FILE" "$MOVE_PATH"
+        chown debian-transmission:ftpusers "$MOVE_PATH"
     else
         echo "No match found for $FILENAME."
     fi
+}
+
+scanVideoLibrary() {
+    curl -H "Accept: application/json" -H "Content-type: application/json" -d '{"id":5,"jsonrpc":"2.0","method":"VideoLibrary.Scan"}' http://192.168.0.110:8080/jsonrpc
 }
 
 process_file() {
@@ -114,6 +124,7 @@ process_file() {
         detect_pattern
         log "TV_SHOW : $TV_SHOW - EPISODE : $EPISODE - SEASON : $SEASON"
         move_file
+        scanVideoLibrary
     else
         log "Not a TV show file"
     fi
