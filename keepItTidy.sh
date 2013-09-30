@@ -63,6 +63,12 @@ detect_pattern(){
         TV_SHOW="Suits"
         TV_SHOW_CODE="Suits"
     fi
+    
+    #Downton Abbey  
+    if [[ $FILENAME =~ [Dd]ownton[\.[:space:]][Aa]bbey[\.[:space:]]* ]] ; then
+        TV_SHOW="Downton Abbey"
+        TV_SHOW_CODE="Downton.Abbey"
+    fi
 
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]]\?E\([[:digit:]]\{1,2\}\).*/\2/'`
