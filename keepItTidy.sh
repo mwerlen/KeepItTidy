@@ -64,6 +64,12 @@ detect_pattern(){
         TV_SHOW_CODE="Suits"
     fi
     
+    #Sherlock  
+    if [[ $FILENAME =~ [Ss][hH][eE][rR][lL][oO][cC][kK].* ]] ; then
+        TV_SHOW="Sherlock"
+        TV_SHOW_CODE="Sherlock"
+    fi
+    
     #Downton Abbey  
     if [[ $FILENAME =~ [Dd]ownton[\.[:space:]][Aa]bbey[\.[:space:]]* ]] ; then
         TV_SHOW="Downton Abbey"
@@ -71,8 +77,8 @@ detect_pattern(){
     fi
 
     if [[ -n $TV_SHOW ]]; then
-        SEASON=`echo $FILENAME | sed -e  's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]]\?E\([[:digit:]]\{1,2\}\).*/\2/'`
-        EPISODE=`echo $FILENAME | sed -e 's/\(.*\)S\([[:digit:]]\{1,2\}\)[[:space:]]\?E\([[:digit:]]\{1,2\}\).*/\3/'`
+        SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
+        EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
         EXTENSION="${FILE##*.}"
     fi
 }
@@ -126,7 +132,7 @@ process_file() {
     log "Analysing $1"
     log "Filename: $FILENAME, Extension: $EXTENSION"
 
-    if [[ -f $FILE ]] && [[ $EXTENSION =~ (mp4)|(mkv)|(mpeg)|(avi)|(srt)|(mov) ]] ; then
+    if [[ -f $FILE ]] && [[ $EXTENSION =~ (mp4)|(mkv)|(mpeg)|(avi)|(srt)|(mov)|(ass) ]] ; then
         detect_pattern
         log "TV_SHOW : $TV_SHOW - EPISODE : $EPISODE - SEASON : $SEASON"
         move_file
