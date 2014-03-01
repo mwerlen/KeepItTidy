@@ -13,7 +13,7 @@ unset DEBUG
 
 MY_DIR=$(dirname $(readlink -f $0))
 
-$MY_DIR/functions.sh
+. $MY_DIR/functions.sh
 
 # Verifying if help as been requested
 if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]] ; then
