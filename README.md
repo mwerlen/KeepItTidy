@@ -1,7 +1,13 @@
 KeepItTidy
 ==========
 
+Description
+-----------
+
 A light shell script to keep all my movies and TV shows files tidy
+
+Usage
+-----
 
 <pre>
 Usage: ../keepItTidy.sh [folder]
@@ -17,3 +23,12 @@ Environment variables used:
 Notice :
     - Tv shows will be inserted as : House/S09/House.S09E04.avi
 </pre>
+
+Development
+-----------
+
+You need to use Shunit2
+
+````bash
+sudo apt-get install shunit2
+````
