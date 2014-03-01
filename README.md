@@ -32,3 +32,10 @@ You need to use Shunit2
 ````bash
 sudo apt-get install shunit2
 ````
+
+To launch tests :
+
+````bash
+cd test
+. tests.sh
+````
