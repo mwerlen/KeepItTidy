@@ -11,7 +11,9 @@
 #########################################################################
 unset DEBUG
 
-. ./functions.sh
+MY_DIR=`dirname $0`
+
+$MY_DIR/functions.sh
 
 # Verifying if help as been requested
 if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]] ; then
