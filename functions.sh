@@ -74,10 +74,20 @@ detect_pattern(){
         TV_SHOW_CODE="Downton.Abbey"
     fi
 
+    # True Detective 
+    if [[ $FILENAME =~ [Tt]rue[\.[:space:]][Dd]etective[\.[:space:]]* ]] ; then
+        TV_SHOW="True Detective"
+        TV_SHOW_CODE="True.Detective"
+    fi
+
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
         EXTENSION="${FILE##*.}"
+		if [[ -n $SEASON ]]; then
+			SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
+			EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
+		fi
     fi
 }
 
