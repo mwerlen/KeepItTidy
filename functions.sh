@@ -84,7 +84,9 @@ detect_pattern(){
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
         EXTENSION="${FILE##*.}"
-		if [[ -n $SEASON ]]; then
+		
+		#If detection don't work, use another pattern
+		if [[ "$SEASON" == "$FILENAME" ]]; then			
 			SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
 			EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
 		fi

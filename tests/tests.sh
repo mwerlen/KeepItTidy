@@ -36,6 +36,9 @@ function test_detect_pattern () {
 
 	FILENAME="how.i met your mother s4e5.avi"
 	check_HIMYM 4 5
+
+	FILENAME="how.I.Met.06x12.avi"
+	check_HIMYM 6 12
 }
 
 function check_code () {
