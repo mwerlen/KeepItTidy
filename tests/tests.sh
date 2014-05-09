@@ -38,7 +38,10 @@ function test_detect_pattern () {
 	check_HIMYM 4 5
 
 	FILENAME="how.I.Met.06x12.avi"
-	check_HIMYM 6 12
+	check_HIMYM 06 12
+	
+	FILENAME="how.I.Met.11x12.avi"
+	check_HIMYM 11 12
 }
 
 function check_code () {

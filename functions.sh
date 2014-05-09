@@ -87,8 +87,8 @@ detect_pattern(){
 		
 		#If detection don't work, use another pattern
 		if [[ "$SEASON" == "$FILENAME" ]]; then			
-			SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
-			EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{1,2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
+			SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
+			EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
 		fi
     fi
 }
@@ -115,7 +115,7 @@ move_file(){
         fi
 
         echo "Moving $FILENAME to $MOVE_PATH"
-        log "mv $FILE $MOVE_PATH"
+        log "mv \"$FILE\" \"$MOVE_PATH\""
         mv "$FILE" "$MOVE_PATH"
         chown debian-transmission:ftpusers "$MOVE_PATH"
     else
