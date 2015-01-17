@@ -80,6 +80,24 @@ detect_pattern(){
         TV_SHOW_CODE="True.Detective"
     fi
 
+    # Orange is the new Black
+    if [[ $FILENAME =~ [Oo]range[\.[:space:]][Ii]s[\.[:space:]][Tt]he[\.[:space:]][Nn]ew[\.[:space:]][Bb]lack[\.[:space:]]* ]] ; then
+        TV_SHOW="Orange Is The New Black"
+        TV_SHOW_CODE="Orange.Is.The.New.Black"
+    fi
+
+    # Peaky Blinders
+    if [[ $FILENAME =~ [Pp]eaky[\.[:space:]][Bb]linders[\.[:space:]]* ]] ; then
+        TV_SHOW="Peaky Blinders"
+        TV_SHOW_CODE="Peaky.Blinders"
+    fi
+
+    # Marvel's Agent Carter
+    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gent[\.[:space:]][Cc]arter[\.[:space:]]* ]] ; then #' vim ne comprent pas tout !
+        TV_SHOW="Marvel's Agent Carter"
+        TV_SHOW_CODE="Marvels.Agent.Carter"
+    fi
+
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
