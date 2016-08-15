@@ -98,6 +98,12 @@ detect_pattern(){
         TV_SHOW_CODE="Marvels.Agent.Carter"
     fi
 
+    # Marvel's Agent of SHIELD 
+    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gents[\.[:space:]][Oo]f[\.[:space:]][Ss]\.?[Hh]\.?[Ii]\.?[Ll]\.?[Dd]\.?[\.[:space:]]* ]] ; then #' vim ne comprend pas tout !
+        TV_SHOW="Marvel's Agents of SHIELD"
+        TV_SHOW_CODE="AoS"
+    fi
+
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
