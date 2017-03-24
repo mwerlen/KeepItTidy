@@ -99,7 +99,7 @@ detect_pattern(){
     fi
 
     # Marvel's Agent of SHIELD 
-    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gents[\.[:space:]][Oo]f[\.[:space:]][Ss]\.?[Hh]\.?[Ii]\.?[Ll]\.?[Dd]\.?[\.[:space:]]* ]] ; then #' vim ne comprend pas tout !
+    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gents[\.[:space:]][Oo]f[\.[:space:]][Ss]\.?[Hh]\.?[Ii]\.?[Ee]\.?[Ll]\.?[Dd]\.?[\.[:space:]]* ]] ; then #' vim ne comprend pas tout !
         TV_SHOW="Marvel's Agents of SHIELD"
         TV_SHOW_CODE="AoS"
     fi

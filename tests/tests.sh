@@ -65,6 +65,7 @@ function test_detect_pattern_all () {
 	check_code "Orange.Is.The.New.Black.S01E01.VOSTFR.DVDRip.X264-PM5" "Orange.Is.The.New.Black"
 	check_code "Peaky.Blinders.S01E01.VOSTFR.720p.HDTV.x264-GKS.mkv" "Peaky.Blinders"
 	check_code "Marvels.Agent.Carter.S01E03.FASTSUB.VOSTFR.HDTV.XviD-ATN.avi" "Marvels.Agent.Carter"
+    check_code "Marvels.Agents.of.S.H.I.E.L.D.S04E10.SUBFRENCH.WEB-DL.x264-ARK01.mp4" "AoS"
 }
 
 function test_process_file() {
