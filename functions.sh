@@ -93,7 +93,7 @@ detect_pattern(){
     fi
 
     # Marvel's Agent Carter
-    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gent[\.[:space:]][Cc]arter[\.[:space:]]* ]] ; then #' vim ne comprent pas tout !
+    if [[ $FILENAME =~ [Mm]arvel[\']?s[\.[:space:]][Aa]gent[\.[:space:]][Cc]arter[\.[:space:]]* ]] ; then #' vim ne comprend pas tout !
         TV_SHOW="Marvel's Agent Carter"
         TV_SHOW_CODE="Marvels.Agent.Carter"
     fi
@@ -104,16 +104,22 @@ detect_pattern(){
         TV_SHOW_CODE="AoS"
     fi
 
+    # The Good Doctor
+    if [[ $FILENAME =~ [Tt]he[\.[:space:]][Gg]ood[\.[:space:]][Dd]octor[\.[:space:]]* ]] ; then
+        TV_SHOW="The Good Doctor"
+        TV_SHOW_CODE="TGD"
+    fi
+    
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
         EXTENSION="${FILE##*.}"
-		
-		#If detection don't work, use another pattern
-		if [[ "$SEASON" == "$FILENAME" ]]; then			
-			SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
-			EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
-		fi
+        
+        #If detection don't work, use another pattern
+        if [[ "$SEASON" == "$FILENAME" ]]; then            
+            SEASON=`echo $FILENAME | sed -e  's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\2/'`
+            EPISODE=`echo $FILENAME | sed -e 's/\(.*\)\([[:digit:]]\{2\}\)[[:space:]]\?[xX]\([[:digit:]]\{1,2\}\).*/\3/'`
+        fi
     fi
 }
 
@@ -154,7 +160,7 @@ process_file() {
     FILENAME=`basename "$FILE"`
 
     if [[ ! -f "$FILE" ]] ; then
-		log "Found $FILE, but this is not a valid file..."
+        log "Found $FILE, but this is not a valid file..."
         #Not a file
         return
     fi
