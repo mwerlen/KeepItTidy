@@ -110,6 +110,12 @@ detect_pattern(){
         TV_SHOW_CODE="TGD"
     fi
     
+    # The Good Place
+    if [[ $FILENAME =~ [Tt]he[\.[:space:]][Gg]ood[\.[:space:]][Pp]lace[\.[:space:]]* ]] ; then
+        TV_SHOW="The Good Place"
+        TV_SHOW_CODE="TGP"
+    fi
+    
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
