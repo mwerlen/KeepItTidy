@@ -116,6 +116,12 @@ detect_pattern(){
         TV_SHOW_CODE="TGP"
     fi
     
+    # The Americans
+    if [[ $FILENAME =~ [Tt]he[\.[:space:]][Aa]mericans[\.[:space:]]* ]] ; then
+        TV_SHOW="The Americans (2013)"
+        TV_SHOW_CODE="TA"
+    fi
+    
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
