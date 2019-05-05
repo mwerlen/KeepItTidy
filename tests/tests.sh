@@ -67,6 +67,7 @@ function test_detect_pattern_all () {
     check_code "Marvels.Agent.Carter.S01E03.FASTSUB.VOSTFR.HDTV.XviD-ATN.avi" "Marvels.Agent.Carter"
     check_code "Marvels.Agents.of.S.H.I.E.L.D.S04E10.SUBFRENCH.WEB-DL.x264-ARK01.mp4" "AoS"
     check_code "The.Good.Doctor.S01E06.FASTSUB.VOSTFR.720p.HDTV.x264-FDS.mkv" "TGD"
+    check_code "/media/disk/downloads/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem.avi" "Elementary"
 }
 
 function test_process_file() {
