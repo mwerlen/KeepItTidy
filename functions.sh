@@ -149,23 +149,24 @@ move_file(){
 
         if [[ ! -d $TV_SHOW_FOLDER ]] ; then
             echo "Creating TV show folder : $TV_SHOW_FOLDER" 
-            mkdir "$TV_SHOW_FOLDER"
-            chown debian-transmission:ftpusers "$TV_SHOW_FOLDER"
-            chmod 751 "$TV_SHOW_FOLDER"
+            mkdir --mode 2750 "$TV_SHOW_FOLDER"
+            #chown debian-transmission:ftpusers "$TV_SHOW_FOLDER"
+            #chmod 2750 "$TV_SHOW_FOLDER"
         fi
         
         if [[ ! -d $SEASON_FOLDER ]] ; then
             echo "Creating season folder : $SEASON_FOLDER" 
-            mkdir "$SEASON_FOLDER"
-            chown debian-transmission:ftpusers "$SEASON_FOLDER"
-            chmod 751 "$SEASON_FOLDER"
-
+            mkdir --mode 2750 "$SEASON_FOLDER"
+            #chown debian-transmission:ftpusers "$SEASON_FOLDER"
+            #chmod 2750 "$SEASON_FOLDER"
         fi
 
         echo "Moving $FILENAME to $MOVE_PATH"
         log "mv \"$FILE\" \"$MOVE_PATH\""
-        mv "$FILE" "$MOVE_PATH"
-        chown debian-transmission:ftpusers "$MOVE_PATH"
+        #chmod 0640 "$FILE"
+        # Using Rsync to set file permissions and mode
+        rsync --no-group --remove-source-files --chmod=0640 "$FILE" "$MOVE_PATH"
+        #chown debian-transmission:ftpusers "$MOVE_PATH"
     else
         echo "No match found for $FILENAME."
     fi
