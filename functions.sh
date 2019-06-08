@@ -128,6 +128,12 @@ detect_pattern(){
         TV_SHOW_CODE="Elementary"
     fi
     
+    # Chernobyl
+    if [[ $FILENAME =~ [Cc]hernobyl[\.[:space:]]* ]] ; then
+        TV_SHOW="Chernobyl"
+        TV_SHOW_CODE="Chernobyl"
+    fi
+    
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
