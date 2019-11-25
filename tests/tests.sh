@@ -68,6 +68,7 @@ function test_detect_pattern_all () {
     check_code "Marvels.Agents.of.S.H.I.E.L.D.S04E10.SUBFRENCH.WEB-DL.x264-ARK01.mp4" "AoS"
     check_code "The.Good.Doctor.S01E06.FASTSUB.VOSTFR.720p.HDTV.x264-FDS.mkv" "TGD"
     check_code "/media/disk/downloads/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem.avi" "Elementary"
+    check_code "His.Dark.Materials.S01E03.MULTi.1080p.WEBRip.x265-R3MiX.mkv" "HDM"
 }
 
 function test_process_file() {

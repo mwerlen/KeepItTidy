@@ -134,6 +134,12 @@ detect_pattern(){
         TV_SHOW_CODE="Chernobyl"
     fi
     
+    # His Dark Materials
+    if [[ $FILENAME =~ [Hh]is[\.[:space:]][Dd]ark[\.[:space:]][Mm]aterials[\.[:space:]]* ]] ; then
+        TV_SHOW="His Dark Materials"
+        TV_SHOW_CODE="HDM"
+    fi
+
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
