@@ -36,6 +36,6 @@ sudo apt-get install shunit2
 To launch tests :
 
 ````bash
-cd test
-. tests.sh
+cd tests
+./tests.sh
 ````
