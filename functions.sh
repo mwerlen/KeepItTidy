@@ -140,6 +140,12 @@ detect_pattern(){
         TV_SHOW_CODE="HDM"
     fi
 
+    # Le Bureau des legendes
+    if [[ $FILENAME =~ [Ll]e[\.[:space:]][Bb]ureau[\.[:space:]][Dd]es[\.[:space:]][Ll][ée]gendes[\.[:space:]]* ]] ; then
+        TV_SHOW="Le Bureau des légendes"
+        TV_SHOW_CODE="Le.Bureau.Des.Legendes"
+    fi
+
     if [[ -n $TV_SHOW ]]; then
         SEASON=`echo $FILENAME | sed -e  's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\2/'`
         EPISODE=`echo $FILENAME | sed -e 's/\(.*\)[sS]\([[:digit:]]\{1,2\}\)[[:space:]]\?[eE]\([[:digit:]]\{1,2\}\).*/\3/'`
