@@ -69,6 +69,8 @@ function test_detect_pattern_all () {
     check_code "The.Good.Doctor.S01E06.FASTSUB.VOSTFR.720p.HDTV.x264-FDS.mkv" "TGD"
     check_code "/media/disk/downloads/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem/[www.Cpasbien.com] Elementary.S01E01.PILOT.FASTSUB.VOSTFR.DVDSCR.XviD-Xtrem.avi" "Elementary"
     check_code "His.Dark.Materials.S01E03.MULTi.1080p.WEBRip.x265-R3MiX.mkv" "HDM"
+    check_code "Les.Petits.Meurtres.D.Agatha.Christie.S03E02.FRENCH.720p.WEB-DL.H264.AAC-CRT.mkv" "Les petits meurtres d'Agatha Christie"
+    check_code "A.Discovery.of.Witches.S02E06.FASTSUB.VOSTFR.720p.WEB.H264-VOiLA.mkv" "A.Discovery.of.Witches"
 }
 
 function test_process_file() {

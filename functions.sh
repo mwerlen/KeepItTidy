@@ -142,8 +142,20 @@ detect_pattern(){
 
     # Le Bureau des legendes
     if [[ $FILENAME =~ [Ll]e[\.[:space:]][Bb]ureau[\.[:space:]][Dd]es[\.[:space:]][Ll][ée]gendes[\.[:space:]]* ]] ; then
-        TV_SHOW="Le Bureau des légendes"
+        TV_SHOW="Le Bureau Des Légendes"
         TV_SHOW_CODE="Le.Bureau.Des.Legendes"
+    fi
+
+    # A Discovery of Witches
+    if [[ $FILENAME =~ [Aa][\.[:space:]][Dd]iscovery[\.[:space:]][Oo]f[\.[:space:]][Ww]itches[\.[:space:]]* ]] ; then
+        TV_SHOW="A Discovery Of Witches"
+        TV_SHOW_CODE="A.Discovery.of.Witches"
+    fi
+
+    # Les.Petits.Meurtres.D.Agatha.Christie
+    if [[ $FILENAME =~ [Ll]es[\.[:space:]][Pp]etits[\.[:space:]][Mm]eurtres[\.[:space:]][Dd][\.[:space:]][Aa]gatha[\.[:space:]][Cc]hristie[\.[:space:]]* ]] ; then
+        TV_SHOW="Les Petits Meurtres D'Agatha Christie"
+        TV_SHOW_CODE="Les petits meurtres d'Agatha Christie"
     fi
 
     if [[ -n $TV_SHOW ]]; then
